@@ -60,7 +60,7 @@ void BasicGMM(size_t matArow, size_t matAcol, size_t matBrow, size_t matBcol, fl
   // Fill this part
   // Fill this part
   // Fill this part
-  // Fill this part
+  CUDA_RUNTIME(cudaMalloc((void **)&deviceC, cSz * sizeof(float)));
   seconds = t.elapsed();
   Log(debug, "done... %f sec\n\n", seconds);
 
