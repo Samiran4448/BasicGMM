@@ -39,9 +39,9 @@ bool verify(const float *A, const float *B, const float *C, size_t m, size_t k,
       float sum = 0;
       for (size_t i = 0; i < k; ++i)
       {
-        sum += A[row + i * m] * B[i * n + col];
+        sum += A[row * i + m] * B[i * n + col];
       }
-      float relativeError = (sum - C[row + col * m]) / sum;
+      float relativeError = (sum - C[row * m + col]) / sum;
       if (std::abs(relativeError) > 1e-6)
       {
         Log(critical, "the results were not close enough at C[%lu, %lu], expected %f got %f", row, col, sum, C[row + col * m]);
