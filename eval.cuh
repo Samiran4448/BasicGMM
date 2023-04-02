@@ -39,7 +39,7 @@ bool verify(const float *A, const float *B, const float *C, size_t m, size_t k,
       float sum = 0;
       for (size_t i = 0; i < k; ++i)
       {
-        sum += A[row * i + m] * B[i * n + col];
+        sum += A[row * m + i] * B[i * n + col];
       }
       float relativeError = (sum - C[row * m + col]) / sum;
       if (std::abs(relativeError) > 1e-6)
