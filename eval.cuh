@@ -39,9 +39,9 @@ bool verify(const float *A, const float *B, const float *C, size_t m, size_t k,
       float sum = 0;
       for (size_t i = 0; i < k; ++i)
       {
-        sum += A[row * m + i] * B[i * n + col];
+        sum += A[row * k + i] * B[i * n + col];
       }
-      float relativeError = (sum - C[row * m + col]) / sum;
+      float relativeError = (sum - C[row * n + col]) / sum;
       if (std::abs(relativeError) > 1e-6)
       {
         Log(critical, "the results were not close enough at C[%lu, %lu], expected %f got %f", row, col, sum, C[row + col * m]);
@@ -77,7 +77,7 @@ int eval(const size_t matArow, const size_t matAcol, const size_t matBcol)
   auto seconds = t.elapsed();
   Log(debug, "done... %f sec\n\n", seconds);
 
-  BasicGMM(matArow, matAcol, matBcol, matBrow, hostA, hostB, hostC);
+  BasicGMM(matArow, matAcol, matBrow, matBcol, hostA, hostB, hostC);
 
   // verify with provided implementation
   // timer_start("Verifying results");
